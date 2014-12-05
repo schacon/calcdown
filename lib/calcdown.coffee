@@ -1,18 +1,17 @@
 CalcDownView = require './calcdown-view'
 
 module.exports =
-  config:
-    autocompleteBrackets:
-      type: 'boolean'
-      default: true
-    autocompleteSmartQuotes:
-      type: 'boolean'
-      default: true
-    wrapSelectionsInBrackets:
-      type: 'boolean'
-      default: true
+  configDefaults:
+    grammars: [
+      'source.gfm'
+      'text.plain'
+      'text.plain.null-grammar'
+    ]
 
   activate: ->
     atom.workspace.observeTextEditors (editor) ->
+      grammars = atom.config.get('calcdown.grammars') ? []
+      return unless editor.getGrammar().scopeName in grammars
+
       editorElement = atom.views.getView(editor)
       new CalcDownView(editor, editorElement)

@@ -1,8 +1,8 @@
 {
   "name": "calcdown",
   "main": "./lib/calcdown",
-  "version": "0.0.0",
-  "description": "A short description of your package",
+  "version": "0.0.1",
+  "description": "Auto-calculates stuff in Markdown files",
   "activationCommands": {
     "atom-workspace": "calcdown:toggle"
   },
