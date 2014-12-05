@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle CalcDown'
+      'command': 'calcdown:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'CalcDown'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'calcdown:toggle'
+        }
+      ]
+    ]
+  }
+]
