@@ -4,13 +4,16 @@
 
 * marker disappears when completer disappears
 
+* proper operator precedence (80 - 20 + 50 !== 10)
+
 ## Features
 
-* addition, mult, sub, div
-  - int
-  - floats
-  - vars
-  - nested values
+* operations
+  - %, ^
+  - negative
+  - bitwise (shift, and, or, xor)
+  - sqrt
+  - sets: mean, median
 
 * percentages
 
@@ -18,11 +21,16 @@
   - pushes / seconds =>
   - performance = pushes / seconds =>
 
-* money
-  - currency conversion
-
 * toggle calcdown
   - in each document?
   - extension specifically for calcdown docs?
+
+* money
+  - currency conversion
+
+* different bases
+  - hex, oct, bin
+
+* display parse errors?
 
 * copy values / export final / actually change doc?

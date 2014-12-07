@@ -15,22 +15,56 @@ class CalcDownView
 
     @updateCalc()
 
+  # parse the markdown file,
+  #  run all the calculations
+  #  and update the completions
   updateCalc: (content) ->
     try
       parsed = @parser.parse @editor.getText()
       for item in parsed
         console.log item
-        if item[0] == 'assign'
-          @values[item[1]] = item[2]
-        if item[0] == 'complete'
-          console.log re = new RegExp(item[1] + '\\s+\\=\\>', 'g')
-          @editor.scan re, ({range}) =>
-            console.log range.end
-            @updateResult(item[1] + '-1', range.end, @values[item[1]])
 
-      console.log parsed
+        # value assigned to a variable
+        if item[0] == 'assign'
+          @values[item[1]] = @calculateValue(item[2])
+
+        # calculated value to be displayed in the doc
+        if item[0] == 'complete'
+          @total = 0
+
+          # find the completions to add the overlays
+          re = new RegExp(item[1] + '\\s+\\=\\>', 'g')
+          @editor.scan re, ({range}) =>
+            @total += 1
+            @updateResult(item[1] + '-' + @total, range.end, @values[item[1]])
+
     catch error
+      # TODO: display parse error?
       console.log error
+
+  # take the parse tree and figure out what the actual value to be assigned is
+  calculateValue: (parsed) ->
+    console.log parsed
+    vtype = typeof parsed
+    if vtype == 'number'
+      return parsed
+    if vtype == 'string'
+      if @values[parsed]
+        return @values[parsed]
+    if parsed['type'] == 'compute'
+      val1 = @calculateValue(parsed['args'][0])
+      val2 = @calculateValue(parsed['args'][1])
+      switch parsed['name']
+        when "+"
+          return val1 + val2
+        when "-"
+          return val1 - val2
+        when "*"
+          return val1 * val2
+        when "/"
+          return val1 / val2
+    console.log typeof parsed
+    return "Err"
 
   updateResult: (id, position, result) ->
     result = "&nbsp;" + result

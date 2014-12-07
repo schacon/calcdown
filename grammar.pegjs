@@ -55,7 +55,7 @@ additive
   / muldiv
 
 primary
-  = (variable / integer / float / money)
+  = (variable / float / integer / money)
   / "(" _ additive:additive _ ")" { return additive; }
 
 muldiv

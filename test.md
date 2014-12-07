@@ -1,7 +1,14 @@
 # Test Document
 
-test = 10
-boom = 5
+  test = 80.4 + 53.1
 
-test =>
-boom =>
+This is pretty cool
+
+  boom = test + 131
+  boom2 = boom - 101
+
+Here are the results
+
+test  =>
+boom  =>
+boom2 =>
