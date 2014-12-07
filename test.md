@@ -1,11 +1,11 @@
 # Test Document
 
-  test = 80.4 + 53.1
+  test = 80
 
-This is pretty cool
+This is an example test of CalcDown
 
   boom = test + 131
-  boom2 = boom - 101
+  boom2 = boom * 3
 
 Here are the results
 
