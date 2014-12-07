@@ -1,5 +1,8 @@
-# calcdown package
+# CalcDown Atom Package
 
-A short description of your package.
+The CalcDown Atom plugin turns a Markdown document into a Calca/Soulver-like smart interpreted document.
 
-![A screenshot of your spankin' package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+![calcdown](https://cloud.githubusercontent.com/assets/70/5331922/1f40740a-7e40-11e4-86c5-cd36689a2513.gif)
+
+
+

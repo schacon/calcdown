@@ -1,12 +1,12 @@
 {
-  "name": "calcdown",
+  "name": "CalcDown",
   "main": "./lib/calcdown",
   "version": "0.0.1",
   "description": "Auto-calculates stuff in Markdown files",
   "activationCommands": {
     "atom-workspace": "calcdown:toggle"
   },
-  "repository": "https://github.com/atom/calcdown",
+  "repository": "https://github.com/schacon/calcdown",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
