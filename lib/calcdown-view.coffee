@@ -9,6 +9,14 @@ class CalcDownView
     @results = {}
     @parser = parser
 
+    item = document.createElement('div')
+    item.classList.add 'calcdown-result'
+    newContent = document.createTextNode("RESULT")
+    item.appendChild(newContent)
+
+    marker = editor.markBufferPosition([0, 0], invalidate: 'never')
+    decoration = editor.decorateMarker(marker, {type: 'overlay', item})
+
     @subscriptions.add @editor.onDidChange (content) =>
       @updateCalc(content)
 
