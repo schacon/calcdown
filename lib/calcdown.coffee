@@ -1,4 +1,9 @@
 CalcDownView = require './calcdown-view'
+{allowUnsafeEval} = require 'loophole'
+
+PEG = require 'pegjs'
+fs = require 'fs-plus'
+path = require 'path'
 
 module.exports =
   configDefaults:
@@ -9,9 +14,14 @@ module.exports =
     ]
 
   activate: ->
-    atom.workspace.observeTextEditors (editor) ->
-      grammars = atom.config.get('calcdown.grammars') ? []
-      return unless editor.getGrammar().scopeName in grammars
+    grammarFile = path.join(__dirname, '..', 'grammar.pegjs')
+    fs.readFile grammarFile, (error, contents) ->
+      allowUnsafeEval ->
+        @parser = PEG.buildParser(contents.toString())
 
-      editorElement = atom.views.getView(editor)
-      new CalcDownView(editor, editorElement)
+      atom.workspace.observeTextEditors (editor) ->
+        grammars = atom.config.get('calcdown.grammars') ? []
+        return unless editor.getGrammar().scopeName in grammars
+
+        editorElement = atom.views.getView(editor)
+        new CalcDownView(editor, editorElement, @parser)

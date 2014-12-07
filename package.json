@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "event-kit": "^0.8.0",
-    "underscore-plus": "1.x"
+    "underscore-plus": "1.x",
+    "pegjs": "^0.8.0",
+    "fs-plus": "^2.3.2",
+    "loophole": "1.0.0"
   }
 }
