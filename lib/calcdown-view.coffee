@@ -9,24 +9,37 @@ class CalcDownView
     @results = {}
     @parser = parser
 
-    item = document.createElement('div')
-    item.classList.add 'calcdown-result'
-    newContent = document.createTextNode("RESULT")
-    item.appendChild(newContent)
-
-    marker = editor.markBufferPosition([0, 0], invalidate: 'never')
-    decoration = editor.decorateMarker(marker, {type: 'overlay', item})
-
     @subscriptions.add @editor.onDidChange (content) =>
       @updateCalc(content)
 
     @updateCalc()
 
   updateCalc: (content) ->
-    console.log(content)
-    console.log(@editor.getText())
     try
       parsed = @parser.parse @editor.getText()
+      @updateResult('test-1', [1, 9], Math.random())
       console.log parsed
     catch error
       console.log error
+
+  updateResult: (id, position, result) ->
+    result = "&nbsp;" + result
+    if !@results[id]
+      # create an overlay element to hold the result
+      item = document.createElement('div')
+      item.classList.add 'calcdown-result'
+      item.innerHTML = result
+
+      # create a marker at the position and add the overlay to display the result
+      marker = @editor.markBufferPosition(position, invalidate: 'never')
+      decoration = @editor.decorateMarker(marker, {type: 'overlay', item})
+      @results[id] = decoration
+    else
+      # find the overlay for this result and update the value
+      decoration = @results[id]
+      decoration.getProperties().item.innerHTML = result
+
+      # move the decoration's marker if it changed (?)
+      marker = @editor.markBufferPosition(position, invalidate: 'never')
+      if !decoration.marker.isEqual(marker)
+        decoration.marker = marker
